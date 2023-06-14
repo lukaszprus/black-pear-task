@@ -1,1 +1,26 @@
-<p>patient-list works!</p>
+<div class="table-responsive">
+  <table class="table table-striped table-primary">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Family names</th>
+        <th scope="col">Given names</th>
+        <th scope="col">DOB</th>
+        <th scope="col">NHS number</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let patient of patients; index as i">
+        <th scope="row">{{ i + 1 | number }}</th>
+        <td>{{ patient.familyNames }}</td>
+        <td>{{ patient.givenNames }}</td>
+        <td>{{ patient.dob }}</td>
+        <td>
+          <a [routerLink]="patient.nhsNumber">
+            {{ patient.nhsNumber }}
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

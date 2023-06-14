@@ -1,17 +1,21 @@
-<div class="row">
-  <app-patient-filters></app-patient-filters>
-</div>
+<div class="container">
+  <div class="row">
+    <div class="col col-md-8 col-lg-6 mx-auto">
+      <app-patient-filters (filtersChange)="onFiltersChange($event)"></app-patient-filters>
 
-<div class="alert alert-danger" role="alert">
-  A simple danger alert—check it out!
-</div>
-
-<div class="card">
-  <div class="card-body">
-    This is some text within a card body.
+      <div *ngIf="notification" [ngClass]="'alert alert-' + notification.type" role="alert">
+        {{ notification.message }}
+      </div>
+    </div>
   </div>
-</div>
 
-<div class="row">
-  <app-patient-list></app-patient-list>
+  <div *ngIf="patients" class="mt-5">
+    <div *ngIf="!patients.length" class="card">
+      <div class="card-body">
+        Nothing found
+      </div>
+    </div>
+
+    <app-patient-list *ngIf="patients.length" [patients]="patients"></app-patient-list>
+  </div>
 </div>

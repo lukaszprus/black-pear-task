@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 import { PatientSearchComponent } from './patient-search/patient-search.component';
 import { PatientListComponent } from './patient-list/patient-list.component';
@@ -14,7 +16,9 @@ import { PatientFiltersComponent } from './patient-filters/patient-filters.compo
     PatientFiltersComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    ReactiveFormsModule,
+    RouterModule
   ]
 })
 export class PatientModule {}

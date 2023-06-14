@@ -1,14 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-patient-detail',
-  templateUrl: './patient-detail.component.html'
+  template: '{{ id }}'
 })
-export class PatientDetailComponent implements OnInit {
+export class PatientDetailComponent {
+  id: any;
 
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor(route: ActivatedRoute) {
+    this.id = route.snapshot.params['id'];
   }
-
 }

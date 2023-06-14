@@ -1,1 +1,85 @@
-<p>patient-filters works!</p>
+<form [formGroup]="filtersForm" (ngSubmit)="filtersForm.valid ? onSubmit() : filtersForm.markAllAsTouched()">
+  <legend class="text-center">Filters</legend>
+
+  <div class="row mb-3" data-test-familyName>
+    <label for="familyName" class="col-sm-4 col-form-label">Family name</label>
+    <div class="col-sm-8">
+      <input type="text" class="form-control" id="familyName" formControlName="familyName"
+        [class.is-valid]="familyName.valid && familyName.touched"
+        [class.is-invalid]="familyName.invalid && familyName.touched">
+
+      <ng-container *ngIf="familyName.invalid && familyName.touched && familyName.errors as errors">
+        <div *ngIf="errors['minlength']" class="invalid-feedback">
+          Minimum 2 characters required
+        </div>
+
+        <div *ngIf="errors['maxlength']" class="invalid-feedback">
+          Maximum 30 characters allowed
+        </div>
+      </ng-container>
+    </div>
+  </div>
+
+  <div class="row mb-3" data-test-givenName>
+    <label for="givenName" class="col-sm-4 col-form-label">Given name</label>
+    <div class="col-sm-8">
+      <input type="text" class="form-control" id="givenName" formControlName="givenName"
+        [class.is-valid]="givenName.valid && givenName.touched"
+        [class.is-invalid]="givenName.invalid && givenName.touched">
+
+      <ng-container *ngIf="givenName.invalid && givenName.touched && givenName.errors as errors">
+        <div *ngIf="errors['minlength']" class="invalid-feedback">
+          Minimum 2 characters required
+        </div>
+
+        <div *ngIf="errors['maxlength']" class="invalid-feedback">
+          Maximum 30 characters allowed
+        </div>
+      </ng-container>
+    </div>
+  </div>
+
+  <div class="row mb-3" data-test-dob>
+    <label for="dob" class="col-sm-4 col-form-label">DOB</label>
+    <div class="col-sm-8">
+      <input type="date" class="form-control" id="dob" formControlName="dob"
+        [class.is-valid]="dob.valid && dob.touched"
+        [class.is-invalid]="dob.invalid && dob.touched">
+
+      <ng-container *ngIf="dob.invalid && dob.touched && dob.errors as errors">
+        <div *ngIf="errors['dob']" class="invalid-feedback">
+          Invalid dob
+        </div>
+      </ng-container>
+    </div>
+  </div>
+
+  <div class="row mb-3" data-test-nhsNumber>
+    <label for="nhsNumber" class="col-sm-4 col-form-label">NHS number</label>
+    <div class="col-sm-8">
+      <input type="text" class="form-control" id="nhsNumber" formControlName="nhsNumber"
+        [class.is-valid]="nhsNumber.valid && nhsNumber.touched"
+        [class.is-invalid]="nhsNumber.invalid && nhsNumber.touched">
+
+      <ng-container *ngIf="nhsNumber.invalid && nhsNumber.touched && nhsNumber.errors as errors">
+        <div *ngIf="errors['nhsnumber']" class="invalid-feedback">
+          Invalid NHS number
+        </div>
+      </ng-container>
+    </div>
+  </div>
+
+  <div class="row mb-3" data-test-notification *ngIf="filtersForm.invalid && filtersForm.touched && filtersForm.errors && filtersForm.errors['requiredany']">
+    <div class="alert alert-danger" role="alert">
+      Filters cannot be empty
+    </div>
+  </div>
+
+  <div class="d-grid">
+    <button type="submit" class="btn btn-primary btn-block">
+      Submit
+    </button>
+  </div>
+</form>
+
+<!-- <pre>{{ filtersForm.value | json }}</pre> -->
